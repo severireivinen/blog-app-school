@@ -1,0 +1,3 @@
+MONGODB_URI=mongodb+srv://root:snt12345@cluster0.9pimo.mongodb.net/blog-app?retryWrites=true&w=majority
+PORT=5000
+SECRET=h87897tg78/FG87dfo372ryl87go
