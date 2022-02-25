@@ -18,8 +18,6 @@ tokenRouter.post("/", async (req, res) => {
     return res.status(401).json({ error: "Bad token" });
   }
 
-  console.log("Payload: ", payload);
-
   // Valid token, send a new one
   const user = await User.findById({ _id: payload.id });
 
