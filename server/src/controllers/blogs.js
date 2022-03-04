@@ -29,9 +29,32 @@ blogsRouter.post("/", middleware.isAuth, async (req, res) => {
 });
 
 blogsRouter.put("/:id", middleware.isAuth, async (req, res) => {
+  const user = req.user;
+  console.log(user);
+
+  // Check if user has already liked the blog
+  const blogToLike = await Blog.findById(req.params.id);
+
+  if (blogToLike.likedBy.includes(user.id)) {
+    return res.status(400).json({ error: "User has already liked this blog" });
+  }
+
+  // Update Blog
   const updatedBlog = await Blog.findByIdAndUpdate(
     req.params.id,
-    { $inc: { likes: 1 } },
+    {
+      $inc: { likes: 1 },
+      $push: { likedBy: user.id },
+    },
+    { new: true }
+  );
+
+  // Update user
+  await User.findByIdAndUpdate(
+    user.id,
+    {
+      $push: { likedBlogs: updatedBlog.id },
+    },
     { new: true }
   );
 
