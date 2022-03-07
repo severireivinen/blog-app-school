@@ -38,6 +38,14 @@ export default function Form({ setToken }) {
     }
   };
 
+  const handleRegister = async (credentials) => {
+    try {
+      await auth.register(credentials);
+    } catch (e) {
+      console.log("Register error: ", e);
+    }
+  };
+
   return (
     <div className="form">
       <div>
@@ -88,7 +96,15 @@ export default function Form({ setToken }) {
           type="password"
         />
 
-        <button className="btn" type="submit">
+        <button
+          className="btn"
+          type="button"
+          onClick={() =>
+            handleRegister({ username: nameR, password: passwordR }).then(() =>
+              handleLogin({ username: nameR, password: passwordR })
+            )
+          }
+        >
           Sign Up
         </button>
       </form>

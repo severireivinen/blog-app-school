@@ -8,6 +8,11 @@ const login = async (credentials) => {
   return res.data;
 };
 
+const register = async (credentials) => {
+  const res = await axios.post(`${baseUrl}/users/register`, credentials);
+  return res.data;
+};
+
 const updateToken = async () => {
   const res = await axios.post(`${baseUrl}/token`, null, {
     headers: {
@@ -23,4 +28,4 @@ const updateToken = async () => {
   return data;
 };
 
-export default { login, updateToken };
+export default { login, register, updateToken };
