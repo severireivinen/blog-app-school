@@ -6,4 +6,13 @@ const getAllBlogs = async () => {
   return res.data;
 };
 
-export default { getAllBlogs };
+const likeBlog = async (id) => {
+  const res = await axios.put(`${baseUrl}/${id}`, null, {
+    headers: {
+      Authorization: localStorage.getItem("appToken"),
+    },
+  });
+  return res.data;
+};
+
+export default { getAllBlogs, likeBlog };

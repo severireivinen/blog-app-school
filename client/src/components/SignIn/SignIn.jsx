@@ -28,10 +28,7 @@ export default function Form({ setToken }) {
     try {
       const token = await authService.login(credentials);
       console.log("Token: ", token);
-      window.localStorage.setItem(
-        "appToken",
-        `Bearer ${JSON.stringify(token)}`
-      );
+      localStorage.setItem("appToken", `Bearer ${token}`);
       setToken(token);
     } catch (e) {
       console.log("Login error: ", e);
