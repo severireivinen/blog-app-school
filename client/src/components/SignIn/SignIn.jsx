@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./SignIn.scss";
-import auth from "../../services/auth";
+import authService from "../../services/authService";
 
 export default function Form({ setToken }) {
   const [nameS, setNameS] = useState("");
@@ -26,7 +26,7 @@ export default function Form({ setToken }) {
 
   const handleLogin = async (credentials) => {
     try {
-      const token = await auth.login(credentials);
+      const token = await authService.login(credentials);
       console.log("Token: ", token);
       window.localStorage.setItem(
         "appToken",
@@ -40,7 +40,7 @@ export default function Form({ setToken }) {
 
   const handleRegister = async (credentials) => {
     try {
-      await auth.register(credentials);
+      await authService.register(credentials);
     } catch (e) {
       console.log("Register error: ", e);
     }

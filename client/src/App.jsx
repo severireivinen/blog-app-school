@@ -5,14 +5,14 @@ import NewBlogButton from "./components/NewBlogButton/NewBlogButton";
 import { Blogs } from "./containers/Blogs/Blogs";
 import SignIn from "./components/SignIn/SignIn";
 
-import auth from "./services/auth";
+import authService from "./services/authService";
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    auth.updateToken().then((data) => {
+    authService.updateToken().then((data) => {
       setToken(data);
       window.localStorage.setItem("appToken", `Bearer ${JSON.stringify(data)}`);
     });
