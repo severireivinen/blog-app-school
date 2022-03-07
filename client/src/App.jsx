@@ -6,17 +6,22 @@ import { Blogs } from "./containers/Blogs/Blogs";
 import SignIn from "./components/SignIn/SignIn";
 
 import authService from "./services/authService";
+import blogService from "./services/blogService";
 
 const App = () => {
+  const [blogs, setBlogs] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
     authService.updateToken().then((data) => {
       setToken(data);
-      //window.localStorage.setItem("appToken", `Bearer ${JSON.stringify(data)}`);
       window.localStorage.setItem("appToken", `Bearer ${data}`);
     });
+  }, []);
+
+  useEffect(() => {
+    blogService.getAllBlogs().then((blogs) => setBlogs(blogs));
   }, []);
 
   const openModal = () => {
@@ -33,7 +38,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Blogs />
+      <Blogs blogs={blogs} setBlogs={setBlogs} />
       <NewBlogButton openModal={openModal} />
       <div>
         {modalIsOpen && (
