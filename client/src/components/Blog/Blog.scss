@@ -21,6 +21,18 @@
   align-items: center;
   justify-content: space-between;
 
+  .app__blog-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  span {
+    font-size: 1rem;
+    color: var(--secondary-color);
+  }
+
   div {
     display: flex;
     align-items: center;
