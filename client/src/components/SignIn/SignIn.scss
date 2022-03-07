@@ -1,6 +1,6 @@
 .form {
   text-align: center;
-  background-color:green;
+  background-color: #d6d6d6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,8 +11,9 @@
 .label{
   display: block;
   font-size: larger;
-  color: white;
+  color: black;
   padding: 5px;
+  font-family: sans-serif;
 }
  
 .input{
@@ -23,33 +24,11 @@
 }
 .btn{
   color: white;
-  background-color: red;
+  background-color: #1c8d21;
   border-radius: 5px;
   font-size: larger;
   display: block;
   padding: 5px;
   margin: 10px auto;
-}
- 
-.messages{
-  display: flex;
-  justify-content: center;
-}
- 
-.error{
-  display: block;
-  background-color: red;
-  color: white;
-  width: fit-content;
-  height: 50px;
-  padding: 5px;
-}
- 
-.success{
-  display: block;
-  background-color: lightblue;
-  color: black;
-  width: fit-content;
-  height: 50px;
-  padding: 5px;
+  font-family: sans-serif;
 }
