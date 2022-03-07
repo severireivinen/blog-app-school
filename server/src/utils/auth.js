@@ -24,7 +24,11 @@ const createRefreshToken = (user) => {
 };
 
 const sendRefreshToken = (res, token) => {
-  res.cookie("jid", token, { httpOnly: true, sameSite: "lax" });
+  res.cookie("jid", token, {
+    httpOnly: true,
+    //secure: true,
+    //sameSite: "none",
+  });
 };
 
 module.exports = {

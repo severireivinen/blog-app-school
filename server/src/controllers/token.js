@@ -6,8 +6,11 @@ const User = require("../models/user");
 
 tokenRouter.post("/", async (req, res) => {
   const token = req.cookies.jid;
+
+  console.log(req.cookies);
+
   if (!token) {
-    return res.status(401).json({ error: "No valid token" });
+    return res.status(200).json({ error: "No valid token" });
   }
 
   let payload;
@@ -15,7 +18,7 @@ tokenRouter.post("/", async (req, res) => {
   try {
     payload = jwt.verify(token, config.REFRESH_SECRET);
   } catch (err) {
-    return res.status(401).json({ error: "Bad token" });
+    return res.status(200).json({ error: "Bad token" });
   }
 
   // Valid token, send a new one
@@ -26,7 +29,7 @@ tokenRouter.post("/", async (req, res) => {
   }
 
   if (user.tokenVersion !== payload.tokenVersion) {
-    return res.status(401).json({ error: "Token expired" });
+    return res.status(200).json({ error: "Token expired" });
   }
 
   return res.status(200).send(auth.createAccessToken(user));

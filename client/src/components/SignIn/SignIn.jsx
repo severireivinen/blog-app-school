@@ -1,54 +1,43 @@
-import { useState } from 'react';
+import { useState } from "react";
 import "./SignIn.scss";
- 
-export default function Form() {
- 
-  const [nameS, setNameS] = useState('');
-  const [passwordS, setPasswordS] = useState('');
-  const [nameR, setNameR] = useState('');
-  const [passwordR, setPasswordR] = useState('');
-  const [setSubmittedS] = useState(false);
-  const [setErrorS] = useState(false);
-  const [setSubmittedR] = useState(false);
-  const [setErrorR] = useState(false);
- 
+import auth from "../../services/auth";
+
+export default function Form({ setToken }) {
+  const [nameS, setNameS] = useState("");
+  const [passwordS, setPasswordS] = useState("");
+  const [nameR, setNameR] = useState("");
+  const [passwordR, setPasswordR] = useState("");
+
   const handleNameS = (e) => {
     setNameS(e.target.value);
-    setSubmittedS(false);
   };
+
   const handleNameR = (e) => {
     setNameR(e.target.value);
-    setSubmittedR(false);
   };
- 
+
   const handlePasswordS = (e) => {
     setPasswordS(e.target.value);
-    setSubmittedS(false);
   };
+
   const handlePasswordR = (e) => {
     setPasswordR(e.target.value);
-    setSubmittedR(false);
   };
- 
-  const handleSubmitS = (e) => {
-    e.preventDefault();
-    if (nameS === '' || passwordS === '') {
-      setErrorS(true);
-    } else {
-      setSubmittedS(true);
-      setErrorS(false);
+
+  const handleLogin = async (credentials) => {
+    try {
+      const token = await auth.login(credentials);
+      console.log("Token: ", token);
+      window.localStorage.setItem(
+        "appToken",
+        `Bearer ${JSON.stringify(token)}`
+      );
+      setToken(token);
+    } catch (e) {
+      console.log("Login error: ", e);
     }
   };
-  const handleSubmitR = (e) => {
-    e.preventDefault();
-    if (nameR === '' || passwordR === '') {
-      setErrorR(true);
-    } else {
-      setSubmittedR(true);
-      setErrorR(false);
-    }
-  };
- 
+
   return (
     <div className="form">
       <div>
@@ -56,14 +45,26 @@ export default function Form() {
       </div>
       <form>
         <label className="label">Username</label>
-        <input onChange={handleNameS} className="input"
-          value={nameS} type="text" />
- 
+        <input
+          onChange={handleNameS}
+          className="input"
+          value={nameS}
+          type="text"
+        />
+
         <label className="label">Password</label>
-        <input onChange={handlePasswordS} className="input"
-          value={passwordS} type="password" />
- 
-        <button onClick={handleSubmitS} className="btn" type="submit">
+        <input
+          onChange={handlePasswordS}
+          className="input"
+          value={passwordS}
+          type="password"
+        />
+
+        <button
+          className="btn"
+          type="button"
+          onClick={() => handleLogin({ username: nameS, password: passwordS })}
+        >
           Log In
         </button>
       </form>
@@ -72,14 +73,22 @@ export default function Form() {
       </div>
       <form>
         <label className="label">Username</label>
-        <input onChange={handleNameR} className="input"
-          value={nameR} type="text" />
- 
+        <input
+          onChange={handleNameR}
+          className="input"
+          value={nameR}
+          type="text"
+        />
+
         <label className="label">Password</label>
-        <input onChange={handlePasswordR} className="input"
-          value={passwordR} type="password" />
- 
-        <button onClick={handleSubmitR} className="btn" type="submit">
+        <input
+          onChange={handlePasswordR}
+          className="input"
+          value={passwordR}
+          type="password"
+        />
+
+        <button className="btn" type="submit">
           Sign Up
         </button>
       </form>

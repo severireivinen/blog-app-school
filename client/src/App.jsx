@@ -1,34 +1,43 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import BlogModal from "./components/BlogModal/BlogModal";
 import NewBlogButton from "./components/NewBlogButton/NewBlogButton";
 import { Blogs } from "./containers/Blogs/Blogs";
 import SignIn from "./components/SignIn/SignIn";
 
+import auth from "./services/auth";
+
 const App = () => {
-  
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [token, setToken] = useState(null);
+
+  console.log("App token: ", token);
+
+  useEffect(() => {
+    auth.updateToken().then((data) => setToken(data));
+  }, []);
 
   const openModal = () => {
     setModalIsOpen(true);
-  }
+  };
 
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  if (token === null) {
+    return <SignIn setToken={setToken} />;
   }
 
   return (
     <div className="app">
-      <SignIn />
-      {
-      /*
       <Blogs />
-      <NewBlogButton openModal={openModal}/>
+      <NewBlogButton openModal={openModal} />
       <div>
-        {modalIsOpen && <BlogModal closeModal={closeModal} modalIsOpen={modalIsOpen}/>}
+        {modalIsOpen && (
+          <BlogModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
+        )}
       </div>
-      */
-      }
     </div>
   );
 };

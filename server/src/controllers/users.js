@@ -1,8 +1,6 @@
 const bcrypt = require("bcrypt");
 const usersRouter = require("express").Router();
 const User = require("../models/user");
-const config = require("../utils/config");
-const jwt = require("jsonwebtoken");
 const auth = require("../utils/auth");
 
 const invalidPassword = (password) => !password || password.length < 5;

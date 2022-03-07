@@ -1,8 +1,8 @@
 const config = require("./utils/config");
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
 const mongoose = require("mongoose");
@@ -20,10 +20,16 @@ mongoose
   .catch((error) => {
     logger.error("Error conencting to database:", error.message);
   });
-
-app.use(cors());
-app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+
+    credentials: true,
+  })
+);
+
+app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use("/api/users", usersRouter);
