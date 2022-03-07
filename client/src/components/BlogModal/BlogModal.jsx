@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 
+import blogService from "../../services/blogService";
 import "./BlogModal.scss";
 Modal.setAppElement('#root')
 const BlogModal = ({modalIsOpen, closeModal}) => {
+
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
+
+    const handleTitleChange = (event) => {
+        setTitle(event.target.value)
+    }
+    const handleContentChange= (event) => {
+        setContent(event.target.value)
+    }
+
+    const postBlog = async () => {
+        const newBlog = {
+            title: title,
+            content: content
+        }
+        try {
+            await blogService.createBlog(newBlog)
+        } catch (error) {
+            console.log(error)
+        }
+
+        setTitle=''
+        setContent=''
+    }
+
   return (
       <div className='Modalbase'>
         <Modal 
@@ -16,12 +43,14 @@ const BlogModal = ({modalIsOpen, closeModal}) => {
             <h1>New Blog</h1>
             <form>
                 <span>BLOG TITLE</span>
-                <input type="text" name="header" />
+                <input type="text" name="header" value={title} onChange={handleTitleChange}/>
+
                 <span>BLOG CONTENT</span>
-                <textarea type="text" name="content" />
-                <a href='/'><button type="submit" value="Post Blog" >Post Blog</button></a>
+                <textarea type="text" name="content" value={content} onChange={handleContentChange}/>
+
+                <a ><button onClick={postBlog} type="button" value="Post Blog" >Post Blog</button></a>
                 
-                <a href="/"><button onClick={closeModal}>Close</button></a>
+                <a ><button onClick={closeModal}>Close</button></a>
             </form>
             </div>
             
