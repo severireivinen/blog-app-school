@@ -3,9 +3,9 @@ import { BsPencilSquare } from "react-icons/bs";
 
 import "./NewBlogButton.scss";
 
-const NewBlogButton = () => {
+const NewBlogButton = ({openModal}) => {
   return (
-    <div className="app__newblog">
+    <div className="app__newblog" onClick={openModal}>
       <BsPencilSquare />
     </div>
   );
