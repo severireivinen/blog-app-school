@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 
+<<<<<<< HEAD
 import modalStyles from "./BlogModal.scss";
 /*
 const modalStyles = {
@@ -39,5 +40,36 @@ const BlogModal = ({ modalIsOpen, closeModal }) => {
     </div>
   );
 };
+=======
+import "./BlogModal.scss";
+Modal.setAppElement('#root')
+const BlogModal = ({modalIsOpen, closeModal}) => {
+  return (
+      <div className='Modalbase'>
+        <Modal 
+            isOpen={modalIsOpen} 
+            onRequestClose={closeModal} 
+            className="blogmodal"
+            overlayClassName="modaloverlay"
+        >
+            <div className='modal'>
+            <h1>New Blog</h1>
+            <form>
+                <span>BLOG TITLE</span>
+                <input type="text" name="header" />
+                <span>BLOG CONTENT</span>
+                <textarea type="text" name="content" />
+                <a href='/'><button type="submit" value="Post Blog" >Post Blog</button></a>
+                
+                <a href="/"><button onClick={closeModal}>Close</button></a>
+            </form>
+            </div>
+            
+        </Modal>
+      </div>
+        
+  )
+}
+>>>>>>> 08338f0d34155ebca572783e5954cdb1a6235253
 
 export default BlogModal;
