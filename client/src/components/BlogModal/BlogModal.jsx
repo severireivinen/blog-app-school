@@ -1,38 +1,29 @@
 import React from 'react'
 import Modal from 'react-modal'
 
-import modalStyles from "./BlogModal.scss";
-/*
-const modalStyles = {
-    content: {
-        top: '35%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        width: '60%',
-        transform: 'translate(-40%, -10%)',
-        
-    }
-}
-*/
+import "./BlogModal.scss";
 Modal.setAppElement('#root')
 const BlogModal = ({modalIsOpen, closeModal}) => {
   return (
-      <div className=''>
+      <div className='Modalbase'>
         <Modal 
             isOpen={modalIsOpen} 
             onRequestClose={closeModal} 
-            //style={modalStyles}
+            className="blogmodal"
+            overlayClassName="modaloverlay"
         >
-            <h1>Write a new Blog</h1>
+            <div className='modal'>
+            <h1>New Blog</h1>
             <form>
+                <span>BLOG TITLE</span>
                 <input type="text" name="header" />
+                <span>BLOG CONTENT</span>
                 <textarea type="text" name="content" />
-                <button type="submit" value="Post Blog" >Post Blog</button>
+                <a href='/'><button type="submit" value="Post Blog" >Post Blog</button></a>
                 
-                <button onClick={closeModal}>Close</button>
+                <a href="/"><button onClick={closeModal}>Close</button></a>
             </form>
+            </div>
             
         </Modal>
       </div>
