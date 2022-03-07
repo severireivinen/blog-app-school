@@ -33,11 +33,11 @@ blogsRouter.put("/:id", middleware.isAuth, async (req, res) => {
   console.log(user);
 
   // Check if user has already liked the blog
-  const blogToLike = await Blog.findById(req.params.id);
+  /*const blogToLike = await Blog.findById(req.params.id);
 
   if (blogToLike.likedBy.includes(user.id)) {
     return res.status(400).json({ error: "User has already liked this blog" });
-  }
+  }*/
 
   // Update Blog
   const updatedBlog = await Blog.findByIdAndUpdate(

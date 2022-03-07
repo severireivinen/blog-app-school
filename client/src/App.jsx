@@ -14,7 +14,8 @@ const App = () => {
   useEffect(() => {
     authService.updateToken().then((data) => {
       setToken(data);
-      window.localStorage.setItem("appToken", `Bearer ${JSON.stringify(data)}`);
+      //window.localStorage.setItem("appToken", `Bearer ${JSON.stringify(data)}`);
+      window.localStorage.setItem("appToken", `Bearer ${data}`);
     });
   }, []);
 

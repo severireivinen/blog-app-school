@@ -36,12 +36,11 @@ const isAuth = (req, res, next) => {
     }
 
     const decodedToken = jwt.verify(token, config.SECRET);
-    console.log("Decoded token: ", decodedToken);
     req.user = decodedToken;
     return next();
   } catch {
     return res.status(401).json({
-      error: "Not authorized",
+      error: "Bad request",
     });
   }
 };

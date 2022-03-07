@@ -23,6 +23,7 @@ const BlogModal = ({modalIsOpen, closeModal}) => {
         }
         try {
             await blogService.createBlog(newBlog)
+            closeModal()
         } catch (error) {
             console.log(error)
         }

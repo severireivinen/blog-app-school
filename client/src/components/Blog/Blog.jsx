@@ -1,10 +1,19 @@
 import React from "react";
 import { GoThumbsup } from "react-icons/go";
 
+import blogService from "../../services/blogService";
+
 import "./Blog.scss";
 
-const Blog = ({ blog }) => {
-  console.log(blog);
+const Blog = ({ blog, blogs, setBlogs }) => {
+  const handleLike = async () => {
+    await blogService.likeBlog(blog.id).then(() => {
+      const updatedBlog = { ...blog, likes: (blog.likes += 1) };
+      setBlogs(
+        blogs.map((blog) => (blog.id !== updatedBlog.id ? blog : updatedBlog))
+      );
+    });
+  };
 
   return (
     <div className="app__blog">
@@ -15,7 +24,7 @@ const Blog = ({ blog }) => {
         </div>
         <div>
           <p className="">{blog.likes}</p>
-          <GoThumbsup />
+          <GoThumbsup onClick={handleLike} />
         </div>
       </div>
 

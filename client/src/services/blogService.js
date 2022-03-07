@@ -15,4 +15,13 @@ const createBlog = async (createBlog) => {
   return res.data
 }
 
-export default { getAllBlogs, createBlog };
+const likeBlog = async (id) => {
+  const res = await axios.put(`${baseUrl}/${id}`, null, {
+    headers: {
+      Authorization: localStorage.getItem("appToken"),
+    },
+  });
+  return res.data;
+};
+
+export default { getAllBlogs, likeBlog , createBlog};
