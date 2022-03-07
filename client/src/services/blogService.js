@@ -6,6 +6,15 @@ const getAllBlogs = async () => {
   return res.data;
 };
 
+const createBlog = async (createBlog) => {
+  const res = await axios.post(baseUrl, createBlog, {
+      headers: {
+        Authorization: localStorage.getItem("appToken")
+    }
+  })
+  return res.data
+}
+
 const likeBlog = async (id) => {
   const res = await axios.put(`${baseUrl}/${id}`, null, {
     headers: {
@@ -15,4 +24,4 @@ const likeBlog = async (id) => {
   return res.data;
 };
 
-export default { getAllBlogs, likeBlog };
+export default { getAllBlogs, likeBlog , createBlog};
