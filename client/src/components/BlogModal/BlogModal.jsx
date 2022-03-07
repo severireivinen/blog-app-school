@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import blogService from "../../services/blogService";
 import "./BlogModal.scss";
 Modal.setAppElement("#root");
-const BlogModal = ({ modalIsOpen, closeModal }) => {
+const BlogModal = ({ modalIsOpen, closeModal, blogs, setBlogs}) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -21,7 +21,8 @@ const BlogModal = ({ modalIsOpen, closeModal }) => {
       content: content,
     };
     try {
-      await blogService.createBlog(newBlog);
+      const updatedBlogs =await blogService.createBlog(newBlog);
+      setBlogs(blogs.concat(updatedBlogs))
       setTitle("");
       setContent("");
       closeModal();

@@ -42,7 +42,7 @@ const App = () => {
       <NewBlogButton openModal={openModal} />
       <div>
         {modalIsOpen && (
-          <BlogModal closeModal={closeModal} modalIsOpen={modalIsOpen} />
+          <BlogModal closeModal={closeModal} modalIsOpen={modalIsOpen} blogs={blogs} setBlogs={setBlogs}/>
         )}
       </div>
     </div>
