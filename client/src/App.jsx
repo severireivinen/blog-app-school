@@ -11,10 +11,11 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [token, setToken] = useState(null);
 
-  console.log("App token: ", token);
-
   useEffect(() => {
-    auth.updateToken().then((data) => setToken(data));
+    auth.updateToken().then((data) => {
+      setToken(data);
+      window.localStorage.setItem("appToken", `Bearer ${JSON.stringify(data)}`);
+    });
   }, []);
 
   const openModal = () => {
