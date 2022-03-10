@@ -7,8 +7,6 @@ const User = require("../models/user");
 tokenRouter.post("/", async (req, res) => {
   const token = req.cookies.jid;
 
-  console.log(req.cookies);
-
   if (!token) {
     return res.status(200).json({ error: "No valid token" });
   }

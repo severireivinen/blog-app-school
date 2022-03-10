@@ -52,4 +52,9 @@ usersRouter.post("/login", async (req, res) => {
   res.status(200).send(token);
 });
 
+usersRouter.post("/logout", async (_req, res) => {
+  res.clearCookie("jid");
+  res.status(200).json({ message: "Logged out" });
+});
+
 module.exports = usersRouter;

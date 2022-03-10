@@ -23,7 +23,7 @@ const Blog = ({ blog, blogs, setBlogs }) => {
           <span>{blog.user.username}</span>
         </div>
         <div>
-          <p className="">{blog.likes}</p>
+          <p>{blog.likes}</p>
           <GoThumbsup onClick={handleLike} />
         </div>
       </div>

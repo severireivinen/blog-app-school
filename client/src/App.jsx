@@ -7,6 +7,7 @@ import SignIn from "./components/SignIn/SignIn";
 
 import authService from "./services/authService";
 import blogService from "./services/blogService";
+import LogoutButton from "./components/LogoutButton/LogoutButton";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -38,11 +39,17 @@ const App = () => {
 
   return (
     <div className="app">
+      <LogoutButton />
       <Blogs blogs={blogs} setBlogs={setBlogs} />
       <NewBlogButton openModal={openModal} />
       <div>
         {modalIsOpen && (
-          <BlogModal closeModal={closeModal} modalIsOpen={modalIsOpen} blogs={blogs} setBlogs={setBlogs}/>
+          <BlogModal
+            closeModal={closeModal}
+            modalIsOpen={modalIsOpen}
+            blogs={blogs}
+            setBlogs={setBlogs}
+          />
         )}
       </div>
     </div>
