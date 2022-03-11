@@ -39,7 +39,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <LogoutButton />
+      <LogoutButton setToken={setToken}/>
       <Blogs blogs={blogs} setBlogs={setBlogs} />
       <NewBlogButton openModal={openModal} />
       <div>

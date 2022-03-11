@@ -3,11 +3,11 @@ import authService from "../../services/authService";
 import { BiLogOut } from "react-icons/bi";
 import "./LogoutButton.scss";
 
-const LogoutButton = () => {
+const LogoutButton = ({setToken}) => {
   return (
     <div
       className="app__logout_wrapper"
-      onClick={() => authService.logout().then(() => window.location.reload())}
+      onClick={() => authService.logout().then(() => setToken(null))}
     >
       <BiLogOut />
     </div>
